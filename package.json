@@ -23,7 +23,7 @@
     "build": "tsc --project tsconfig.build.json",
     "postbuild": "node ./tasks/copy.build.mjs",
     "preserve": "npm run build",
-    "serve": "web-dev-server --open /demo/index.html",
+    "serve": "web-dev-server --open /index.html",
     "document": "npx typedoc --tsconfig tsconfig.test.json",
     "prepublish": "npm run build"
   },
@@ -50,5 +50,8 @@
     "typedoc": "^0.25.13",
     "typedoc-plugin-merge-modules": "^5.1.0",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@scalable.software/web.component": "^1.2.1"
   }
 }

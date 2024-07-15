@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>App</title>
+  <link rel="stylesheet" href="./public/styles/html.style.css">
+  <link rel="manifest" href="./public/manifest.json" />
+  <!-- 
+    External Import Maps are not yet supported by browsers.
+    To avoid large Import Maps in the HTML file a script is used to inject the needed maps.
+    See the importmap.build.js file for currently injected maps. 
+  -->
+  <script src="./public/importmap/inject.js"></script>
+  <script src="./public/importmap/importmap.build.js"></script>
+
+</head>
+
+<body>
+  <script src="./public/index.js" type="module"></script>
+  <pin-button></pin-button>
+</body>
+
+</html>
