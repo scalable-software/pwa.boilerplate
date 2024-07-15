@@ -1,5 +1,5 @@
 {
-  "name": "@scalable.software/web.component",
+  "name": "@scalable.software/pwa.boilerplate",
   "version": "1.2.1",
   "description": "Web Component Template",
   "keywords": [
@@ -29,14 +29,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/scalable-software/web.component.git"
+    "url": "git+https://github.com/scalable-software/pwa.boilerplate.git"
   },
   "author": "Scalable.Software",
   "license": "CC-BY-NC-SA-4.0",
   "bugs": {
-    "url": "https://github.com/scalable-software/web.component/issues"
+    "url": "https://github.com/scalable-software/pwa.boilerplate/issues"
   },
-  "homepage": "https://github.com/scalable-software/web.component#readme",
+  "homepage": "https://github.com/scalable-software/pwa.boilerplate#readme",
   "devDependencies": {
     "@types/jasmine": "^5.1.4",
     "@web/dev-server": "^0.4.6",

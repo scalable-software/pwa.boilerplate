@@ -6,7 +6,7 @@
 inject(
   {
     imports: {
-      "@scalable.software/web.component": "./src/Index.js",
+      "@scalable.software/pwa.boilerplate": "./src/Index.js",
     },
   },
   "importmap"

@@ -10,7 +10,7 @@ import {
   Attribute,
   Visible,
   State,
-} from "@scalable.software/web.component";
+} from "@scalable.software/pwa.boilerplate";
 
 describe("Given Pin imported", () => {
   it("then Pin exist", () => {
