@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "declaration": true,
     "rootDir": "./src",
-    "outDir": "./dist/",
+    "outDir": "./dist/code/",
     "baseUrl": "./",
     "paths": {
       "@scalable.software/pwa.boilerplate": ["./src/Index.js"]
