@@ -1,5 +1,5 @@
 {
-  "id": "123456",
+  "id": "pwa.app",
   "scope": "/",
   "name": "PWA Name",
   "display": "standalone",
