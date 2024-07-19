@@ -1,6 +1,6 @@
 // ./dist/Index.js
-import { pwa } from "@scalable.software/pwa.boilerplate";
-console.log("PWA", pwa);
+import { PWA } from "@scalable.software/pwa.boilerplate";
+PWA.registerServiceWorker("/service-worker.js");
 
 // NPM install component
 import { Pin } from "@scalable.software/web.component";
