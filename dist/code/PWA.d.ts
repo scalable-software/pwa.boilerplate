@@ -1,1 +1,3 @@
-export declare const pwa = "test";
+export declare class PWA {
+    static registerServiceWorker: (serviceWorker: any) => Promise<void>;
+}

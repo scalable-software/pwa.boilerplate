@@ -1,1 +1,1 @@
-export { pwa } from "./PWA.js";
+export { PWA } from "./PWA.js";
