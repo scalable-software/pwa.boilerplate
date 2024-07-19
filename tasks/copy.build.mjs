@@ -7,4 +7,4 @@ await copy(["./public/assets/icons/*.png"], "./dist/assets/icons");
 await copy(["./public/assets/readme/*.png"], "./dist/assets/readme");
 await copy(["./public/assets/screenshots/*.png"], "./dist/assets/screenshots");
 await copy(["./public/importmap/*.js"], "./dist/importmap");
-await copy(["./public/app.js"], "./dist");
+await copy(["./public/*.js"], "./dist");
