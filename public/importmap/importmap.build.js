@@ -8,7 +8,7 @@ inject(
     imports: {
       "@scalable.software/web.component":
         "./node_modules/@scalable.software/web.component/dist/Index.js",
-      "@scalable.software/pwa.boilerplate": "./dist/code/Index.js",
+      "@scalable.software/app": "./dist/code/Index.js",
     },
   },
   "importmap"

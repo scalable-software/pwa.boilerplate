@@ -8,7 +8,7 @@
     "outDir": "./dist/code/",
     "baseUrl": "./",
     "paths": {
-      "@scalable.software/pwa.boilerplate": ["./src/Index.js"]
+      "@scalable.software/app": ["./src/Index.js"]
     }
   },
   "include": ["./src/**/*"]
