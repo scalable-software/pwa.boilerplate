@@ -2,7 +2,7 @@ export class PWA {
     static registerServiceWorker = async (serviceWorker) => {
         if ("serviceWorker" in navigator) {
             try {
-                const registration = await navigator.serviceWorker.register(serviceWorker, { scope: "/" });
+                const registration = await navigator.serviceWorker.register(serviceWorker, { scope: "/", type: "module" });
                 if (registration.installing) {
                     console.log("Service Worker: Installing");
                 }
@@ -19,3 +19,4 @@ export class PWA {
         }
     };
 }
+export const test = "test";

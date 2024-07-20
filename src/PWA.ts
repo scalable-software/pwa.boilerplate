@@ -4,7 +4,7 @@ export class PWA {
       try {
         const registration = await navigator.serviceWorker.register(
           serviceWorker,
-          { scope: "/" }
+          { scope: "/", type: "module" }
         );
 
         if (registration.installing) {
@@ -20,3 +20,5 @@ export class PWA {
     }
   };
 }
+
+export const test = "test";
