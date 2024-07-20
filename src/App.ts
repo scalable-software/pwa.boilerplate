@@ -1,10 +1,10 @@
-export class PWA {
-  public static registerServiceWorker = async (serviceWorker) => {
+export class App {
+  public static register = async (worker, options) => {
     if ("serviceWorker" in navigator) {
       try {
         const registration = await navigator.serviceWorker.register(
-          serviceWorker,
-          { scope: "/", type: "module" }
+          worker,
+          options
         );
 
         if (registration.installing) {
@@ -20,5 +20,3 @@ export class PWA {
     }
   };
 }
-
-export const test = "test";
