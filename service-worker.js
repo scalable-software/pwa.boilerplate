@@ -1,21 +1,12 @@
-const app = "pwa-app";
-const version = "v1.0.0";
+import { Cache } from "./cache.js";
 
-// Create a versioned cache
-self.oninstall = (event) =>
-  event.waitUntil(
-    caches.open(app + "." + version).then((cache) => cache.add("/"))
-  );
+const app = {
+  name: "pwa-app",
+  version: "v1.0.0",
+};
 
-// Delete outdated caches
-self.onactivate = (event) =>
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key.includes(app))
-          .filter((key) => !key.includes(version))
-          .map((key) => caches.delete(key))
-      )
-    )
-  );
+self.oninstall = (event) => event.waitUntil(Cache.create(app));
+
+self.onactivate = (event) => event.waitUntil(Cache.clean(app));
+
+self.onfetch = (event) => event.respondWith(Cache.use(event.request, app));
