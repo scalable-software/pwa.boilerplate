@@ -1,1 +1,2 @@
-export { PWA, test } from "./PWA.js";
+export { App } from "./App.js";
+export { Cache } from "./Cache.js";
