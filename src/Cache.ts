@@ -13,11 +13,14 @@ export class Cache {
   static clean = async (app) =>
     caches.keys().then((keys) => Cache.delete(keys, app));
 
+  static cache = async (request, response, app) =>
+    caches
+      .open(app.name + "." + app.version)
+      .then((cache) => cache.put(request, response));
+
   static update = async (request, app) =>
-    fetch(request).then((response) =>
-      caches
-        .open(app.name + "." + app.version)
-        .then((cache) => cache.put(request, response.clone()) && response)
+    fetch(request).then(
+      (response) => Cache.cache(request, response, app) && response
     );
 
   static use = async (request, app) =>
