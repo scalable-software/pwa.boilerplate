@@ -6,13 +6,13 @@ export class ServiceWorker {
         this.path = path;
         this.options = options;
     }
-    register = async (worker, options) => {
+    register = async () => {
         if (!("serviceWorker" in navigator)) {
             console.error("Service Worker: Service Worker not supported in this browser");
             return;
         }
         try {
-            this.registration = await navigator.serviceWorker.register(worker, options);
+            this.registration = await navigator.serviceWorker.register(this.path, this.options);
             this.setupListeners();
             this.logRegistrationState();
         }

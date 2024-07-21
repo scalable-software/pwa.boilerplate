@@ -1,15 +1,22 @@
 export class Cache {
-    static create = async (app) => caches.open(app.name + "." + app.version).then((cache) => cache.add("/"));
-    static delete = async (keys, app) => Promise.all(keys
-        .filter((key) => key.includes(app.name))
-        .filter((key) => !key.includes(app.version))
+    app;
+    constructor(app) {
+        this.app = app;
+    }
+    get name() {
+        return this.app.name + "." + this.app.version;
+    }
+    cache = async (request, response) => caches
+        .open(this.name)
+        .then((cache) => cache.put(request, response.clone()) && response);
+    fetch = async (request) => fetch(request).then((response) => this.cache(request, response));
+    delete = async (keys) => Promise.all(keys
+        .filter((key) => key.includes(this.app.name))
+        .filter((key) => !key.includes(this.app.version))
         .map((key) => caches.delete(key)));
-    static clean = async (app) => caches.keys().then((keys) => Cache.delete(keys, app));
-    static cache = async (request, response, app) => caches
-        .open(app.name + "." + app.version)
-        .then((cache) => cache.put(request, response));
-    static update = async (request, app) => fetch(request).then((response) => Cache.cache(request, response, app) && response);
-    static use = async (request, app) => caches
-        .match(request)
-        .then((response) => response || Cache.update(request, app));
+    create = async () => caches.open(this.name).then((cache) => cache.add("/"));
+    clean = async () => caches.keys().then((keys) => this.delete(keys));
+    use = async (event) => caches
+        .match(event.request)
+        .then((response) => response || this.fetch(event.request));
 }

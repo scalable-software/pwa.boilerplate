@@ -3,7 +3,7 @@ export declare class ServiceWorker {
     private options;
     private registration;
     constructor(path: string, options: RegistrationOptions);
-    register: (worker: any, options: any) => Promise<void>;
+    register: () => Promise<void>;
     private setupListeners;
     private logRegistrationState;
 }

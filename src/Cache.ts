@@ -1,30 +1,33 @@
 export class Cache {
-  static create = async (app) =>
-    caches.open(app.name + "." + app.version).then((cache) => cache.add("/"));
+  constructor(private app: { name: string; version: string }) {}
 
-  static delete = async (keys, app) =>
+  get name() {
+    return this.app.name + "." + this.app.version;
+  }
+
+  private cache = async (request, response) =>
+    caches
+      .open(this.name)
+      .then((cache) => cache.put(request, response.clone()) && response);
+
+  private fetch = async (request) =>
+    fetch(request).then((response) => this.cache(request, response));
+
+  private delete = async (keys) =>
     Promise.all(
       keys
-        .filter((key) => key.includes(app.name))
-        .filter((key) => !key.includes(app.version))
+        .filter((key) => key.includes(this.app.name))
+        .filter((key) => !key.includes(this.app.version))
         .map((key) => caches.delete(key))
     );
 
-  static clean = async (app) =>
-    caches.keys().then((keys) => Cache.delete(keys, app));
+  public create = async () =>
+    caches.open(this.name).then((cache) => cache.add("/"));
 
-  static cache = async (request, response, app) =>
+  public clean = async () => caches.keys().then((keys) => this.delete(keys));
+
+  public use = async (event) =>
     caches
-      .open(app.name + "." + app.version)
-      .then((cache) => cache.put(request, response));
-
-  static update = async (request, app) =>
-    fetch(request).then(
-      (response) => Cache.cache(request, response, app) && response
-    );
-
-  static use = async (request, app) =>
-    caches
-      .match(request)
-      .then((response) => response || Cache.update(request, app));
+      .match(event.request)
+      .then((response) => response || this.fetch(event.request));
 }
