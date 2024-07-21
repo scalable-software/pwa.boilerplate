@@ -1,4 +1,4 @@
-export class App {
+export class ServiceWorker {
   public static register = async (worker, options) => {
     if ("serviceWorker" in navigator) {
       try {

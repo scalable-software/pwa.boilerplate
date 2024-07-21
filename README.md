@@ -1,5 +1,13 @@
 ![License: CC BY-NC-SA 4.0](https://flat.badgen.net/static/license/CC-BY-NC-SA-4.0/green)
 
+## Service Worker
+
+- **Client and Service Worker Communication**: The main app (client-side) controls when the service worker is registered and listens for lifecycle changes. The service worker, in turn, handles caching and responses to network requests.
+
+- **Caching and Version Management**: The service worker uses the Cache class to manage resources in caches based on the application version, ensuring that updates to the service worker or resources cause old caches to be replaced, thus keeping the application up-to-date and fast.
+
+- **Immediate Control**: Using skipWaiting() and clients.claim() ensures that updates to your service worker are applied immediately and control over the pages is claimed by the new worker without needing a page refresh.
+
 # Web.Component
 
 This repository contains a comprehensive boilerplate template for creating Web Components with unit testing and api document generation. The template is designed to demonstrate the use of modern web technologies such as HTML, CSS, and TypeScript to create modular, reusable, and testable web components. The template includes the following features:

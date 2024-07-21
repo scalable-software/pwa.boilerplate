@@ -1,4 +1,4 @@
-export class App {
+export class ServiceWorker {
     static register = async (worker, options) => {
         if ("serviceWorker" in navigator) {
             try {
@@ -17,7 +17,7 @@ export class App {
                 }
             }
             catch (error) {
-                console.error(`Registration failed with ${error}`);
+                console.error(`Service Worker: Registration failed with ${error}`);
             }
         }
     };
