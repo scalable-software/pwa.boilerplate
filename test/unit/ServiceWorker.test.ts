@@ -5,10 +5,3 @@ describe("Given ServiceWorker Imported", () => {
     expect(ServiceWorker).toBeDefined();
   });
 });
-
-// Static Method Existence
-describe("Given ServiceWorker Exists", () => {
-  it("then register static public method exists", () => {
-    expect(ServiceWorker.register).toBeDefined();
-  });
-});

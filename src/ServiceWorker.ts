@@ -1,26 +1,44 @@
 export class ServiceWorker {
-  public static register = async (worker, options) => {
-    if ("serviceWorker" in navigator) {
-      try {
-        const registration = await navigator.serviceWorker.register(
-          worker,
-          options
-        );
+  private registration: ServiceWorkerRegistration | null = null;
 
-        navigator.serviceWorker.oncontrollerchange = () => {
-          console.log("Service Worker: New worker Active.");
-        };
+  public constructor(
+    private path: string,
+    private options: RegistrationOptions
+  ) {}
 
-        if (registration.installing) {
-          console.log("Service Worker: Installing");
-        } else if (registration.waiting) {
-          console.log("Service Worker: Installed");
-        } else if (registration.active) {
-          console.log("Service Worker: Active");
-        }
-      } catch (error) {
-        console.error(`Service Worker: Registration failed with ${error}`);
-      }
+  public register = async (worker, options) => {
+    if (!("serviceWorker" in navigator)) {
+      console.error(
+        "Service Worker: Service Worker not supported in this browser"
+      );
+      return;
+    }
+    try {
+      this.registration = await navigator.serviceWorker.register(
+        worker,
+        options
+      );
+
+      this.setupListeners();
+      this.logRegistrationState();
+    } catch (error) {
+      console.error(`Service Worker: Registration failed with ${error}`);
+    }
+  };
+
+  private setupListeners = () => {
+    navigator.serviceWorker.oncontrollerchange = () => {
+      console.log("Service Worker: New worker Active.");
+    };
+  };
+
+  private logRegistrationState = () => {
+    if (this.registration.installing) {
+      console.log("Service Worker: Installing");
+    } else if (this.registration.waiting) {
+      console.log("Service Worker: Installed");
+    } else if (this.registration.active) {
+      console.log("Service Worker: Active");
     }
   };
 }

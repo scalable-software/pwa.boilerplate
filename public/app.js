@@ -1,5 +1,9 @@
 import { ServiceWorker } from "@scalable.software/app";
-ServiceWorker.register("/service-worker.js", { scope: "/", type: "module" });
+const serviceWorker = new ServiceWorker("/service-worker.js", {
+  scope: "/",
+  type: "module",
+});
+serviceWorker.register();
 
 // NPM installed component
 import { Pin } from "@scalable.software/web.component";
