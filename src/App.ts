@@ -7,6 +7,10 @@ export class App {
           options
         );
 
+        navigator.serviceWorker.oncontrollerchange = () => {
+          console.log("Service Worker: New worker Active.");
+        };
+
         if (registration.installing) {
           console.log("Service Worker: Installing");
         } else if (registration.waiting) {
@@ -15,7 +19,7 @@ export class App {
           console.log("Service Worker: Active");
         }
       } catch (error) {
-        console.error(`Registration failed with ${error}`);
+        console.error(`Service Worker: Registration failed with ${error}`);
       }
     }
   };

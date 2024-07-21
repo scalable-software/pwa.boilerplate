@@ -6,8 +6,10 @@ const app = {
   version: "v1.2.1",
 };
 
-self.oninstall = (event) => event.waitUntil(Cache.create(app));
+self.oninstall = (event) =>
+  event.waitUntil(Cache.create(app).then(() => self.skipWaiting()));
 
-self.onactivate = (event) => event.waitUntil(Cache.clean(app));
+self.onactivate = (event) =>
+  event.waitUntil(Cache.clean(app).then(() => self.clients.claim()));
 
 self.onfetch = (event) => event.respondWith(Cache.use(event.request, app));
