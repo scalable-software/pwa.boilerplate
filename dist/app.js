@@ -1,4 +1,5 @@
 import { ServiceWorker } from "@scalable.software/app";
+
 const serviceWorker = new ServiceWorker("/service-worker.js", {
   scope: "/",
   type: "module",
