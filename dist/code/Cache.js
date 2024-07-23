@@ -6,17 +6,35 @@ export class Cache {
     get name() {
         return this.app.name + "." + this.app.version;
     }
-    cache = async (request, response) => caches
+    match = (request) => caches
         .open(this.name)
-        .then((cache) => cache.put(request, response.clone()) && response);
-    fetch = async (request) => fetch(request).then((response) => this.cache(request, response));
-    delete = async (keys) => Promise.all(keys
+        .then((cache) => cache.match(request))
+        .catch(console.error);
+    put = (request, response) => caches
+        .open(this.name)
+        .then((cache) => cache.put(request, response))
+        .catch(console.error);
+    insert = (request, response) => this.put(request, response)
+        .then(() => response)
+        .catch(console.error);
+    fetch = (request) => fetch(request)
+        .then((response) => this.insert(request, response))
+        .catch(console.error);
+    getInvalid = (keys) => keys
         .filter((key) => key.includes(this.app.name))
-        .filter((key) => !key.includes(this.app.version))
-        .map((key) => caches.delete(key)));
-    create = async () => caches.open(this.name).then((cache) => cache.add("/"));
-    clean = async () => caches.keys().then((keys) => this.delete(keys));
-    use = async (event) => caches
-        .match(event.request)
-        .then((response) => response || this.fetch(event.request));
+        .filter((key) => !key.includes(this.app.version));
+    removeInvalid = (keys) => Promise.all(this.getInvalid(keys).map((key) => caches.delete(key)));
+    validateProtocol = (url) => url.startsWith("http") || url.startsWith("https");
+    create = () => caches
+        .open(this.name)
+        .then((cache) => cache.add("/"))
+        .catch(console.error);
+    update = () => caches
+        .keys()
+        .then((keys) => this.removeInvalid(keys))
+        .catch(console.error);
+    get = (request) => this.validateProtocol(request.url) &&
+        this.match(request)
+            .then((response) => response || this.fetch(request))
+            .catch(console.error);
 }

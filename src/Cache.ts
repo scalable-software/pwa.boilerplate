@@ -1,33 +1,60 @@
+export type Metadata = { name: string; version: string };
+
 export class Cache {
-  constructor(private app: { name: string; version: string }) {}
+  constructor(private app: Metadata) {}
 
   get name() {
     return this.app.name + "." + this.app.version;
   }
 
-  private cache = async (request, response) =>
+  private match = (request) =>
     caches
       .open(this.name)
-      .then((cache) => cache.put(request, response.clone()) && response);
+      .then((cache) => cache.match(request))
+      .catch(console.error);
 
-  private fetch = async (request) =>
-    fetch(request).then((response) => this.cache(request, response));
-
-  private delete = async (keys) =>
-    Promise.all(
-      keys
-        .filter((key) => key.includes(this.app.name))
-        .filter((key) => !key.includes(this.app.version))
-        .map((key) => caches.delete(key))
-    );
-
-  public create = async () =>
-    caches.open(this.name).then((cache) => cache.add("/"));
-
-  public clean = async () => caches.keys().then((keys) => this.delete(keys));
-
-  public use = async (event) =>
+  private put = (request, response) =>
     caches
-      .match(event.request)
-      .then((response) => response || this.fetch(event.request));
+      .open(this.name)
+      .then((cache) => cache.put(request, response))
+      .catch(console.error);
+
+  private insert = (request, response) =>
+    this.put(request, response)
+      .then(() => response)
+      .catch(console.error);
+
+  private fetch = (request) =>
+    fetch(request)
+      .then((response) => this.insert(request, response))
+      .catch(console.error);
+
+  private getInvalid = (keys) =>
+    keys
+      .filter((key) => key.includes(this.app.name))
+      .filter((key) => !key.includes(this.app.version));
+
+  private removeInvalid = (keys) =>
+    Promise.all(this.getInvalid(keys).map((key) => caches.delete(key)));
+
+  private validateProtocol = (url) =>
+    url.startsWith("http") || url.startsWith("https");
+
+  public create = () =>
+    caches
+      .open(this.name)
+      .then((cache) => cache.add("/"))
+      .catch(console.error);
+
+  public update = () =>
+    caches
+      .keys()
+      .then((keys) => this.removeInvalid(keys))
+      .catch(console.error);
+
+  public get = (request) =>
+    this.validateProtocol(request.url) &&
+    this.match(request)
+      .then((response) => response || this.fetch(request))
+      .catch(console.error);
 }

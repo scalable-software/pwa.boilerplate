@@ -7,9 +7,20 @@ const cache = new Cache({
 });
 
 self.oninstall = (event) =>
-  event.waitUntil(cache.create().then(() => self.skipWaiting()));
+  event.waitUntil(
+    cache
+      .create()
+      .then(() => self.skipWaiting())
+      .catch(console.error)
+  );
 
 self.onactivate = (event) =>
-  event.waitUntil(cache.clean().then(() => self.clients.claim()));
+  event.waitUntil(
+    cache
+      .update()
+      .then(() => self.clients.claim())
+      .catch(console.error)
+  );
 
-self.onfetch = (event) => event.respondWith(cache.use(event));
+self.onfetch = (event) =>
+  event.respondWith(cache.get(event.request).catch(console.error));

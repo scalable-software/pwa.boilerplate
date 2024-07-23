@@ -1,14 +1,19 @@
+export type Metadata = {
+    name: string;
+    version: string;
+};
 export declare class Cache {
     private app;
-    constructor(app: {
-        name: string;
-        version: string;
-    });
+    constructor(app: Metadata);
     get name(): string;
-    private cache;
+    private match;
+    private put;
+    private insert;
     private fetch;
-    private delete;
+    private getInvalid;
+    private removeInvalid;
+    private validateProtocol;
     create: () => Promise<void>;
-    clean: () => Promise<any[]>;
-    use: (event: any) => Promise<any>;
+    update: () => Promise<void | any[]>;
+    get: (request: any) => Promise<any>;
 }
