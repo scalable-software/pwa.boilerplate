@@ -12,7 +12,7 @@ export class Cache {
         .catch(console.error);
     put = (request, response) => caches
         .open(this.name)
-        .then((cache) => cache.put(request, response))
+        .then((cache) => cache.put(request, response.clone()))
         .catch(console.error);
     insert = (request, response) => this.put(request, response)
         .then(() => response)
@@ -25,6 +25,13 @@ export class Cache {
         .filter((key) => !key.includes(this.app.version));
     removeInvalid = (keys) => Promise.all(this.getInvalid(keys).map((key) => caches.delete(key)));
     validateProtocol = (url) => url.startsWith("http") || url.startsWith("https");
+    sendUpdateMessage = (client) => client.postMessage({
+        type: "NEW_VERSION",
+        version: this.app.version,
+    });
+    notify = (clients) => {
+        clients.forEach((client) => this.sendUpdateMessage(client));
+    };
     create = () => caches
         .open(this.name)
         .then((cache) => cache.add("/"))

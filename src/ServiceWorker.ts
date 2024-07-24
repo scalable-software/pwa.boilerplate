@@ -30,6 +30,11 @@ export class ServiceWorker {
     navigator.serviceWorker.oncontrollerchange = () => {
       console.log("Service Worker: New worker Active.");
     };
+    navigator.serviceWorker.onmessage = (event) => {
+      if (event.data && event.data.type === "NEW_VERSION") {
+        this.updateNotice(event.data.version);
+      }
+    };
   };
 
   private logRegistrationState = () => {
@@ -40,5 +45,18 @@ export class ServiceWorker {
     } else if (this.registration.active) {
       console.log("Service Worker: Active");
     }
+  };
+
+  private updateNotice = (version) => {
+    const dialog = document.createElement("dialog");
+    dialog.id = "update-notice";
+    dialog.setAttribute("popover", "manual");
+    dialog.innerHTML = `
+      <p>New Version Loaded</p>
+      <p>Version: ${version}</p>
+      <button onclick="window.location.reload(true)">Ok</button>
+    `;
+    document.body.appendChild(dialog);
+    document.getElementById("update-notice").showPopover();
   };
 }

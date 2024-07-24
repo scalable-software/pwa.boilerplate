@@ -13,6 +13,8 @@ export declare class Cache {
     private getInvalid;
     private removeInvalid;
     private validateProtocol;
+    private sendUpdateMessage;
+    notify: (clients: any) => void;
     create: () => Promise<void>;
     update: () => Promise<void | any[]>;
     get: (request: any) => Promise<any>;

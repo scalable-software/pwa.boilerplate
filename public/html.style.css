@@ -1,3 +1,23 @@
 html {
   height: 100%;
 }
+
+:popover-open {
+  width: 300px;
+  height: 200px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+::backdrop {
+  backdrop-filter: blur(3px);
+}
+
+pwa-app {
+  display: none;
+}
+
+pwa-app[state="loaded"] {
+  display: block;
+}

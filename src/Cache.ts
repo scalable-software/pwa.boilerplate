@@ -16,7 +16,7 @@ export class Cache {
   private put = (request, response) =>
     caches
       .open(this.name)
-      .then((cache) => cache.put(request, response))
+      .then((cache) => cache.put(request, response.clone()))
       .catch(console.error);
 
   private insert = (request, response) =>
@@ -39,6 +39,16 @@ export class Cache {
 
   private validateProtocol = (url) =>
     url.startsWith("http") || url.startsWith("https");
+
+  private sendUpdateMessage = (client) =>
+    client.postMessage({
+      type: "NEW_VERSION",
+      version: this.app.version,
+    });
+
+  public notify = (clients) => {
+    clients.forEach((client) => this.sendUpdateMessage(client));
+  };
 
   public create = () =>
     caches
