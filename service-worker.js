@@ -1,20 +1,18 @@
 // Importmaps do not work with service workers, so we need to use the full path to the file.
-import { Cache } from "./dist/code/Index.js";
+import { Storage } from "./dist/code/Index.js";
+import { Clients } from "./dist/code/Index.js";
 
-const cache = new Cache({
+const app = {
   name: "pwa-app",
-  version: "v1.2.2",
-});
+  version: "v1.2.3",
+};
 
-const refresh = () =>
-  self.clients
-    .claim()
-    .then(() => self.clients.matchAll())
-    .then((clients) => cache.notify(clients));
+const storage = new Storage(app);
+const clients = new Clients(self.clients);
 
 self.oninstall = (event) =>
   event.waitUntil(
-    cache
+    storage
       .create()
       .then(() => self.skipWaiting())
       .catch(console.error)
@@ -22,10 +20,10 @@ self.oninstall = (event) =>
 
 self.onactivate = (event) =>
   event.waitUntil(
-    cache
+    storage
       .update()
-      .then(() => refresh())
+      .then(() => clients.notify(app.version))
       .catch(console.error)
   );
 
-self.onfetch = (event) => event.respondWith(cache.get(event.request));
+self.onfetch = (event) => event.respondWith(storage.get(event.request));

@@ -3,19 +3,13 @@ export type Metadata = {
     version: string;
 };
 export declare class Cache {
-    private app;
+    app: any;
     constructor(app: Metadata);
+    /**
+     * @returns {string} The name of the cache
+     * @description Returns the name of the cache
+     */
     get name(): string;
-    private match;
-    private put;
-    private insert;
-    private fetch;
-    private getInvalid;
-    private removeInvalid;
-    private validateProtocol;
-    private sendUpdateMessage;
-    notify: (clients: any) => void;
-    create: () => Promise<void>;
-    update: () => Promise<void | any[]>;
-    get: (request: any) => Promise<any>;
+    match: (request: any) => Promise<void | Response>;
+    put: (request: any, response: any) => Promise<void>;
 }
