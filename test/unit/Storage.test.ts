@@ -1,4 +1,4 @@
-import { Storage } from "@scalable.software/app";
+import { Storage } from "../../src/Storage.js";
 
 describe("Given Storage Imported", () => {
   it("then Storage exists", () => {

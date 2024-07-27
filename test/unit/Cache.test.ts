@@ -1,4 +1,4 @@
-import { Cache } from "@scalable.software/app";
+import { Cache } from "../../src/Cache.js";
 
 describe("Given Cache Imported", () => {
   it("then Cache exists", () => {
