@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 import { copy } from "./copy.mjs";
-await copy(["./src/**/*.css", "./src/**/*.html"], "./dist");
+await copy(["./src/**/*.css", "./src/**/*.html"], "./dist/code");
 await copy(["./public/*.json"], "./dist");
 await copy(["./public/*.css"], "./dist");
 await copy(["./public/assets/icons/*.png"], "./dist/assets/icons");
