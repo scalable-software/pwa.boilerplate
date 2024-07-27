@@ -1,10 +1,10 @@
 // Importmaps do not work with service workers, so we need to use the full path to the file.
-import { Storage } from "./dist/code/Index.js";
-import { Clients } from "./dist/code/Index.js";
+import { Storage } from "./dist/code/Storage.js";
+import { Clients } from "./dist/code/Clients.js";
 
 const app = {
   name: "pwa-app",
-  version: "v1.2.3",
+  version: "v1.2.4",
 };
 
 const storage = new Storage(app);
