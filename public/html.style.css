@@ -13,11 +13,3 @@ html {
 ::backdrop {
   backdrop-filter: blur(3px);
 }
-
-pwa-app {
-  display: none;
-}
-
-pwa-app[state="loaded"] {
-  display: block;
-}
