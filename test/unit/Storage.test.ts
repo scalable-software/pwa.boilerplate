@@ -301,8 +301,9 @@ describe("Given storage.delete private method exists", () => {
 
 describe("Given storage.keys private method exists", () => {
   let storage: Storage;
-  beforeEach(() => {
+  beforeEach(async () => {
     storage = new Storage({ name: "app", version: "1.0.0" });
+    await storage.create();
   });
   describe("when storage.keys() is called", () => {
     it("then keys contains cache.name", () => {

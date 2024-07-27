@@ -8,8 +8,6 @@ export declare class Storage {
     cache: Cache;
     constructor(app: any);
     private getInvalid;
-    private sendUpdateMessage;
-    notify: (clients: any) => void;
     private keys;
     private delete;
     private stale;

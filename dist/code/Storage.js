@@ -9,15 +9,6 @@ export class Storage {
     getInvalid = (keys) => keys
         .filter((key) => key.includes(this.app.name))
         .filter((key) => !key.includes(this.app.version));
-    // UNIT TEST
-    sendUpdateMessage = (client) => client.postMessage({
-        type: "NEW_VERSION",
-        version: this.app.version,
-    });
-    // UNIT TEST
-    notify = (clients) => {
-        clients.forEach((client) => this.sendUpdateMessage(client));
-    };
     keys = () => caches.keys();
     delete = (keys) => Promise.all(keys.map((key) => caches.delete(key))).catch(console.error);
     stale = () => this.keys()
