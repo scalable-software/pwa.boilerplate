@@ -17,12 +17,24 @@
   --svg-shadow: drop-shadow(1px 1px 1px var(--light-svg-shadow));
   --svg-size: 24px;
   --svg-margin: 6px;
+  display: block;
+}
+
+:host(:not(:has(:defined))) {
+  display: none;
+}
+
+:host(:not(:defined)) {
   display: none;
 }
 
 /* Visible.NO */
 :host([visible="no"]) {
   display: none;
+}
+
+:host([visible="yes"]) {
+  display: block;
 }
 
 :host([state="disabled"]) {

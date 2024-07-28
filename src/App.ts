@@ -170,15 +170,6 @@ export class App extends Component {
   };
 
   /**
-   * TODO: enable the app after all children are loaded
-   */
-  protected _initialize = () => {
-    setTimeout(() => {
-      this.enable();
-    }, 2000);
-  };
-
-  /**
    * Called by the connectedCallback prototypical method
    * @hidden
    */
