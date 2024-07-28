@@ -28,7 +28,7 @@
   display: none;
 }
 
-/* Visible.NO */
+/* State Visible */
 :host([visible="no"]) {
   display: none;
 }
@@ -37,6 +37,7 @@
   display: block;
 }
 
+/* State State */
 :host([state="disabled"]) {
   display: none;
 }

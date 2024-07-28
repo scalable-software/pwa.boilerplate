@@ -134,14 +134,6 @@ export class App extends Component {
         [Attribute.VISIBLE]: (value) => (this.visible = value),
     };
     /**
-     * TODO: enable the app after all children are loaded
-     */
-    _initialize = () => {
-        //setTimeout(() => {
-        //  this.enable();
-        //}, 2000);
-    };
-    /**
      * Called by the connectedCallback prototypical method
      * @hidden
      */

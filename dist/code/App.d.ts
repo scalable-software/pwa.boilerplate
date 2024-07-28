@@ -97,10 +97,6 @@ export declare class App extends Component {
         visible: (value: string) => Visibility;
     };
     /**
-     * TODO: enable the app after all children are loaded
-     */
-    protected _initialize: () => void;
-    /**
      * Called by the connectedCallback prototypical method
      * @hidden
      */
