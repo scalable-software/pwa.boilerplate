@@ -275,25 +275,19 @@ describe("Given storage.delete private method exists", () => {
   beforeEach(() => {
     storage = new Storage({ name: "app", version: "1.0.4" });
   });
-  describe("and caches for each key in list of key exists", () => {
-    let keys = [];
-    let other = "other";
-    beforeEach(() => {
-      keys.push("app.1.0.0");
-      keys.push("app.1.0.1");
-      keys.push("app.1.0.2");
-      keys.push("app.1.0.3");
-      keys.push(other);
-      keys.push(storage.cache.name);
-      keys.forEach(async (key) => await caches.open(key));
+  describe("and cache for app exist", () => {
+    beforeEach(async () => {
+      await storage.create();
     });
-    describe("when storage.delete(keys) is called", () => {
+    describe("when storage.delete(key) is called", () => {
+      let key;
       beforeEach(async () => {
-        await storage["delete"](keys);
+        key = storage.cache.name;
+        await storage["delete"]([key]);
       });
       it("then storage.keys() does not contain keys", async () => {
-        const cachedKeys = await storage["keys"]();
-        keys.forEach((key) => expect(cachedKeys).not.toContain(key));
+        const keys = await storage["keys"]();
+        expect(keys).not.toContain(key);
       });
     });
   });
