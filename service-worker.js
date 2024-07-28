@@ -4,7 +4,7 @@ import { Clients } from "./dist/code/Clients.js";
 
 const app = {
   name: "pwa-app",
-  version: "v1.2.6",
+  version: "v1.2.7",
 };
 
 const storage = new Storage(app);

@@ -6,5 +6,5 @@ export declare class ServiceWorker {
     register: () => Promise<void>;
     private setupListeners;
     private logRegistrationState;
-    private updateNotice;
+    private update;
 }

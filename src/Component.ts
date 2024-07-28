@@ -92,7 +92,6 @@ export class Component extends HTMLElement {
    * @memberof Component
    */
   connectedCallback() {
-    this._initialize();
     this._addEventListeners();
   }
 
@@ -155,8 +154,6 @@ export class Component extends HTMLElement {
   };
 
   protected _attributeHandlers = {};
-
-  protected _initialize = () => {};
 
   protected _addEventListeners = () => {};
 

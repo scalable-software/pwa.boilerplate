@@ -106,6 +106,7 @@ export declare class App extends Component {
      * @hidden
      */
     protected _removeEventListeners: () => void;
+    update: (version: any) => void;
     /**
      * Change the visibility of the app to `no`
      * @category Operations

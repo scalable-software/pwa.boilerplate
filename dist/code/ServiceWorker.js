@@ -26,7 +26,7 @@ export class ServiceWorker {
         };
         navigator.serviceWorker.onmessage = (event) => {
             if (event.data && event.data.type === "NEW_VERSION") {
-                this.updateNotice(event.data.version);
+                this.update(event.data.version);
             }
         };
     };
@@ -41,16 +41,8 @@ export class ServiceWorker {
             console.log("Service Worker: Active");
         }
     };
-    updateNotice = (version) => {
-        const dialog = document.createElement("dialog");
-        dialog.id = "update-notice";
-        dialog.setAttribute("popover", "manual");
-        dialog.innerHTML = `
-      <p>New Version Loaded</p>
-      <p>Version: ${version}</p>
-      <button onclick="window.location.reload(true)">Ok</button>
-    `;
-        document.body.appendChild(dialog);
-        document.getElementById("update-notice").showPopover();
+    update = (version) => {
+        const app = document.querySelector("pwa-app");
+        app.update(version);
     };
 }

@@ -183,6 +183,19 @@ export class App extends Component {
   protected _removeEventListeners = () =>
     this.removeEventListener(Gesture.CLICK, this._handleClick);
 
+  public update = (version) => {
+    const dialog = this.root.querySelector("dialog") as HTMLDialogElement;
+    const info = dialog.querySelector("#version") as HTMLParagraphElement;
+
+    if (info) {
+      info.textContent = `Version: ${version}`;
+    }
+
+    if (dialog && typeof dialog.showModal === "function") {
+      dialog.showModal();
+    }
+  };
+
   /**
    * Change the visibility of the app to `no`
    * @category Operations

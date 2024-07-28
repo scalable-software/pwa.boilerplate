@@ -85,7 +85,6 @@ export declare class Component extends HTMLElement {
      */
     protected _addTemplate: (id: string) => void;
     protected _attributeHandlers: {};
-    protected _initialize: () => void;
     protected _addEventListeners: () => void;
     protected _removeEventListeners: () => void;
 }

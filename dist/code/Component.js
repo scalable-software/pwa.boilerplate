@@ -83,7 +83,6 @@ export class Component extends HTMLElement {
      * @memberof Component
      */
     connectedCallback() {
-        this._initialize();
         this._addEventListeners();
     }
     /**
@@ -139,7 +138,6 @@ export class Component extends HTMLElement {
         this._loadTemplate(id);
     };
     _attributeHandlers = {};
-    _initialize = () => { };
     _addEventListeners = () => { };
     _removeEventListeners = () => { };
 }

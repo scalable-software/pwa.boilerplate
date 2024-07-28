@@ -1,22 +1,5 @@
 /* Default */
 :host {
-  --light-icon-color: rgba(150, 118, 202, 0.4);
-  --light-icon-hover: rgba(150, 118, 202, 0.2);
-  --icon-border-color-on: rgba(150, 118, 202, 0.2);
-  --icon-border-color-off: rgba(85, 0, 169, 0);
-  --icon-border-color-hover: rgba(150, 118, 202, 0.2);
-  --icon-border-shadow: drop-shadow(0px 0px 1px var(--light-icon-hover));
-  --icon-size: 36px;
-  --icon-margin: 2px;
-  --icon-radius: 4px;
-  --icon-border-on: 1px solid var(--icon-border-color-on);
-  --icon-border-off: 1px solid var(--icon-border-color-off);
-  --icon-border-hover: 1px solid var(--icon-border-color-hover);
-  --light-svg-color: rgba(128, 0, 255, 0.8);
-  --light-svg-shadow: rgba(128, 0, 255, 0.2);
-  --svg-shadow: drop-shadow(1px 1px 1px var(--light-svg-shadow));
-  --svg-size: 24px;
-  --svg-margin: 6px;
   display: block;
 }
 
@@ -44,4 +27,36 @@
 
 :host([state="enabled"]) {
   display: block;
+}
+
+dialog {
+  width: 300px;
+  height: 125px;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: rgba(128, 0, 255, 0.5);
+}
+
+button {
+  background-color: #dedede;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+  background-color: #e6e6e6;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+::backdrop {
+  backdrop-filter: blur(3px);
 }
